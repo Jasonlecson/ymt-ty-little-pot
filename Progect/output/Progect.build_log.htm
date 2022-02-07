@@ -1,0 +1,90 @@
+<html>
+<body>
+<pre>
+<h1>�Vision Build Log</h1>
+<h2>Tool Versions:</h2>
+IDE-Version: ��Vision V5.36.0.0
+Copyright (C) 2021 ARM Ltd and ARM Germany GmbH. All rights reserved.
+License Information: Jason Lecson, LIF, LIC=IK1BF-61FWJ-NNPAF-6P3K4-PK1D3-NNBMZ
+ 
+Tool Versions:
+Toolchain:       MDK-ARM Plus  Version: 5.36.0.0
+Toolchain Path:  C:\Keil_v5\ARM\ARMCC\Bin
+C Compiler:      Armcc.exe V5.06 update 7 (build 960)
+Assembler:       Armasm.exe V5.06 update 7 (build 960)
+Linker/Locator:  ArmLink.exe V5.06 update 7 (build 960)
+Library Manager: ArmAr.exe V5.06 update 7 (build 960)
+Hex Converter:   FromElf.exe V5.06 update 7 (build 960)
+CPU DLL:         SARMCM3.DLL V5.36.0.0
+Dialog DLL:      DARMSTM.DLL V1.68.0.0
+Target DLL:      STLink\ST-LINKIII-KEIL_SWO.dll V3.0.9.0
+Dialog DLL:      TARMSTM.DLL V1.66.0.0
+ 
+<h2>Project:</h2>
+C:\Users\lujin\Documents\WeChat Files\STM32F10xTemplate-tuya\Progect\Progect.uvprojx
+Project File Date:  12/06/2021
+
+<h2>Output:</h2>
+*** Using Compiler 'V5.06 update 7 (build 960)', folder: 'C:\Keil_v5\ARM\ARMCC\Bin'
+Build target 'Target 1'
+Note: source file '..\mcu_sdk\system.c' - object file renamed from '.\output\system.o' to '.\output\system_1.o'.
+compiling usart.c...
+..\User\usart.c(217): warning:  #550-D: variable "Res"  was set but never used
+  	u8 Res;
+..\User\usart.c(218): warning:  #177-D: variable "value"  was declared but never referenced
+  	int value;
+..\User\usart.c(280): warning:  #177-D: variable "data"  was declared but never referenced
+  	uint8_t data = ch;
+..\User\usart.c: 3 warnings, 0 errors
+compiling mcu_api.c...
+compiling main.c...
+compiling timer.c...
+compiling system.c...
+..\mcu_sdk\system.c(165): warning:  #177-D: variable "str"  was declared but never referenced
+      unsigned char str[10] = {0};
+..\mcu_sdk\system.c: 1 warning, 0 errors
+compiling sensor_control.c...
+..\User\sensor_control.c(278): warning:  #177-D: variable "float_value"  was declared but never referenced
+  	float float_value=0;
+..\User\sensor_control.c: 1 warning, 0 errors
+compiling protocol.c...
+..\mcu_sdk\protocol.c(203): warning:  #167-D: argument of type "char *" is incompatible with parameter of type "const unsigned char *"
+  	mcu_dp_string_update(DPID_SAFE_TEMPERATURE,sensor_control_struct_value.public_temp_char,sensor_control_struct_value.public_int_value); //STRING型数据上�?;
+..\mcu_sdk\protocol.c(207): warning:  #167-D: argument of type "char *" is incompatible with parameter of type "const unsigned char *"
+  	mcu_dp_string_update(DPID_SAFE_HUMIDITY,sensor_control_struct_value.public_temp_char,sensor_control_struct_value.public_int_value); //STRING型数据上�?;
+..\mcu_sdk\protocol.c(211): warning:  #167-D: argument of type "char *" is incompatible with parameter of type "const unsigned char *"
+  	mcu_dp_string_update(DPID_SAFE_ILLUMINATION,sensor_control_struct_value.public_temp_char,sensor_control_struct_value.public_int_value); //STRING型数据上�?;
+..\mcu_sdk\protocol.c(215): warning:  #167-D: argument of type "char *" is incompatible with parameter of type "const unsigned char *"
+  	mcu_dp_string_update(DPID_SAFE_FERTILITY,sensor_control_struct_value.public_temp_char,sensor_control_struct_value.public_int_value); //STRING型数据上�?;
+..\mcu_sdk\protocol.c(221): warning:  #167-D: argument of type "char *" is incompatible with parameter of type "const unsigned char *"
+  	mcu_dp_string_update(DPID_START_DATE,sensor_control_struct_value.public_temp_char,sensor_control_struct_value.public_int_value); //STRING型数据上�?;
+..\mcu_sdk\protocol.c(227): warning:  #167-D: argument of type "char *" is incompatible with parameter of type "const unsigned char *"
+  	mcu_dp_string_update(DPID_BEGIN_DATE,sensor_control_struct_value.public_temp_char,sensor_control_struct_value.public_int_value); 
+..\mcu_sdk\protocol.c(403): warning:  #68-D: integer conversion resulted in a change of sign
+  		if(type!=-1){
+..\mcu_sdk\protocol.c(457): warning:  #167-D: argument of type "char *" is incompatible with parameter of type "const unsigned char *"
+  		mcu_dp_string_update(DPID_BEGIN_DATE,sensor_control_struct_value.public_temp_char,sensor_control_struct_value.public_int_value);
+..\mcu_sdk\protocol.c(1212): warning:  #223-D: function "Reset_MCU" declared implicitly
+  			Reset_MCU();
+..\mcu_sdk\protocol.c: 9 warnings, 0 errors
+linking...
+Program Size: Code=40460 RO-data=552 RW-data=628 ZI-data=10324  
+FromELF: creating hex file...
+After Build - User command #1: C:\Keil_v5\ARM\ARMCC\bin\fromelf.exe  --bin -o  .\Progect\Progect.bin  .\output\Progect.axf
+".\output\Progect.axf" - 0 Error(s), 14 Warning(s).
+
+<h2>Software Packages used:</h2>
+
+Package Vendor: Keil
+                http://www.keil.com/pack/Keil.STM32F1xx_DFP.2.3.0.pack
+                Keil.STM32F1xx_DFP.2.3.0
+                STMicroelectronics STM32F1 Series Device Support, Drivers and Examples
+
+<h2>Collection of Component include folders:</h2>
+  C:\Users\lujin\AppData\Local\Arm\Packs\Keil\STM32F1xx_DFP\2.3.0\Device\Include
+
+<h2>Collection of Component Files used:</h2>
+Build Time Elapsed:  00:00:01
+</pre>
+</body>
+</html>
