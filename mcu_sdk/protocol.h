@@ -37,7 +37,7 @@
 #define PRODUCT_KEY "x6pawkkb3zq8q9fn"    //开发平台创建产品后生成的16位字符产品唯一标识
 #endif
 
-#define MCU_VER "1.1.8"         //用户的软件版本,用于MCU固件升级,MCU升级版本需修改
+#define MCU_VER "1.1.9"         //用户的软件版本,用于MCU固件升级,MCU升级版本需修改
 
 /*  模块工作方式选择,只能三选一,推荐使用防误触模式  */
 //#define CONFIG_MODE     CONFIG_MODE_DEFAULT             //默认工作模式

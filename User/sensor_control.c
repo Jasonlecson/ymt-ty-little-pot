@@ -1099,7 +1099,7 @@ void WateringCirculationFunction(void)
 				//湿度低
 				if(sensor_control_struct_value.humidity_value<sensor_control_struct_value.safe_humidity[0] && 
 					//自动模式 && 水箱有水
-					sensor_control_struct_value.mode_value == 0 && sensor_control_struct_value.water_stage_value>SAFE_HYDROPENIA){
+					sensor_control_struct_value.mode_value == 0 /*&& sensor_control_struct_value.water_stage_value>SAFE_HYDROPENIA*/){
 					sensor_pump_set(1);
 				}
 			}
