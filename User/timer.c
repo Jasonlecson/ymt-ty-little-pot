@@ -46,6 +46,7 @@ int timer2_buzzer_cnt=0;//控制蜂鸣器蜂鸣时间
 int timer2_water_clear_flag_cnt=0;//超时清除缺水和水满标志
 int timer2_temp_humi_value;
 
+int fill_light_auto_off_cnt = 0; 
 /**
 * @brief  定时器2配置
 * @param  None
@@ -99,6 +100,7 @@ void TimestampAddCountFun(void){
 		if(TimestampAddCount>=1000){
 			TimestampAddCount=0;
 			timestamp++;
+			fill_light_auto_off_cnt++;
 		}
 	}
 }

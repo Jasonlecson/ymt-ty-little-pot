@@ -84,6 +84,8 @@ SENSOR_CONTROL_Cx_ event_struct event_struct_value;
 //传感器数据
 typedef struct sensor_control_struct
 {
+	char on; 
+	char on_copy; 
 	int  public_int_value;//通用变量
 	char public_temp_char[public_temp_char_len];//通用变量
 	char pump_value;//水泵
@@ -213,6 +215,8 @@ typedef struct sensor_control_struct
 	int soc_value;
 	int soc_value_copy;
 	
+	char fill_light_on; //????? 
+	char fill_light_on_copy; 
 } sensor_control_struct;
 
 

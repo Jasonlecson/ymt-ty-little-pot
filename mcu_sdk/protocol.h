@@ -261,6 +261,9 @@ BLE_test_result内部有#err提示,完成函数后请删除该#err
                         1:dp数据点序列号重新定义
           **此为自动生成代码,如在开发平台有相关修改请重新下载MCU_SDK**         
 ******************************************************************************/
+//开关功能(可下发可上报) 
+//备注: 
+#define DPID_ON 1 
 //浇水功能(可下发可上报)
 //备注:
 #define DPID_PUMP 2
@@ -404,7 +407,7 @@ BLE_test_result内部有#err提示,完成函数后请删除该#err
 #define DPID_SOC 124
 //环境湿度(可下发可上报)
 //备注:
-#define DPID_HUMIDITY_ENVIRONMENT 125
+#define DPID_HUMIDITY_ENVIRONMENT 107
 
 /**
  * @brief  串口发送数据

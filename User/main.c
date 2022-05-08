@@ -112,8 +112,7 @@ int main(void)
 			sensor_data_collection();
 			//上报传感器数据
 			sensor_data_appear();
-			//控制浇水一段时间以后停止浇水
-			sensor_watering();
+
 			//每培育1天,基质减一 , 爱心值累加10
 			NurtureDayFunction();
 			//循环浇水
@@ -125,7 +124,10 @@ int main(void)
 		}
 		
 		wifi_uart_service();
-		
+			/*******************************************???*******************************************/ 
+			sensor_control_struct_value.pump_value = RelayGet(); 
+			//??????h????????????? 
+			sensor_watering(); 
 		if(mcu_updata_flag==0){
 			//需要定时运行的程序
 			TimerData();

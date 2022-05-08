@@ -180,7 +180,7 @@ int iic_read_byte(char addr){
 	IIC_Stop();
 	return(data);
 }
-
+int a = 0;
 //获取光照强度
 int illumination_get(void)
 {
@@ -190,7 +190,6 @@ int illumination_get(void)
 	u8 ack=0;
 	int data=0;
 	static int delay=0;
-	
 //	if(HardwareVersion == 1)
 	{//BH1750
 		if(delay==0){
@@ -214,6 +213,7 @@ int illumination_get(void)
 		delay = delay+1;
 		
 		if(delay>=150){
+			a++;
 			delay=0;
 			IIC_Start();
 			ack = IIC_Send_Byte(0x47);

@@ -86,6 +86,7 @@ const char *weather_choose[WEATHER_CHOOSE_CNT] = {
 ******************************************************************************/
 const DOWNLOAD_CMD_S download_cmd[] =
 {
+	{DPID_ON, DP_TYPE_BOOL},
   {DPID_PUMP, DP_TYPE_BOOL},
   {DPID_LIGHT, DP_TYPE_BOOL},
   {DPID_TEMP_CURRENT, DP_TYPE_VALUE},
@@ -166,7 +167,7 @@ void uart_transmit_output(unsigned char value)
 void all_data_update(void)
 {
 //    #error "请在此处理可下发可上报数据及只上报数据示例,处理完成后删除该行"
-	
+	mcu_dp_bool_update(DPID_ON,sensor_control_struct_value.on);
 	//当前浇水功能
 	mcu_dp_bool_update(DPID_PUMP,sensor_control_struct_value.pump_value);
 	//BOOL型数据上报;当前指示灯开关
@@ -274,6 +275,58 @@ void all_data_update(void)
                             2:所有数据上报处理
 自动化代码模板函数,具体请用户自行实现数据处理
 ******************************************************************************/
+//函数名称 : dp_download_switch_handle 
+//功能描述 : 针对DPID_ON的处理函数 
+//输入参数 : value:数据源数据 
+//        : length:数据长度 
+//返回参数 : 成功返回:SUCCESS/失败返回:ERROR 
+//使用说明 : 可下发可上报类型,需要在处理完数据后上报处理结果至app 
+//*****************************************************************************/ 
+ 
+static unsigned char dp_download_switch_handle(const unsigned char value[], unsigned short length) 
+{ 
+    //示例:当前DP类型为BOOL 
+    unsigned char ret; 
+     
+    unsigned char on; 
+    on = mcu_get_dp_download_bool(value,length); 
+	 
+//		printf("\r\nfill_light_mode=%d\r\n",fill_light_mode); 
+    switch(on) { 
+        case 0: 
+					FlashSetSwitch(0); 
+					sensor_control_struct_value.on=0; 
+					sensor_control_struct_value.on_copy=0; 
+					sensor_light_set(0); 
+					FlashSetLedState(0); 
+				sensor_fill_light_set(0); 
+				sensor_control_struct_value.fill_light_on = 0; 
+				mcu_dp_bool_update(DPID_FILL_LIGHT,sensor_control_struct_value.fill_light_on); 
+				mcu_dp_bool_update(DPID_LIGHT,sensor_control_struct_value.fill_light_on); 
+					 
+        break; 
+         
+        case 1: 
+					FlashSetSwitch(1); 
+					sensor_control_struct_value.on=1; 
+					sensor_control_struct_value.on_copy=1; 
+					sensor_light_set(1); 
+					FlashSetLedState(1); 
+				mcu_dp_bool_update(DPID_LIGHT,1); 
+        break; 
+         
+        default: 
+     
+        break; 
+    } 
+     
+    //处理完DP数据后应有反馈 
+    ret = mcu_dp_bool_update(DPID_ON, on); 
+    if(ret == SUCCESS) 
+        return SUCCESS; 
+    else 
+        return ERROR; 
+} 
 /*****************************************************************************
 函数名称 : dp_download_pump_handle
 功能描述 : 针对DPID_PUMP的处理函数
@@ -411,7 +464,7 @@ static unsigned char dp_download_type_handle(const unsigned char value[], unsign
 					sensor_control_struct_value.love_value = sensor_control_struct_value.love_value + 20;
 					FlashSetLoveValue(sensor_control_struct_value.love_value);
 					//设置种植时间
-					sensor_control_struct_value.plant_value = timestamp;
+					sensor_control_struct_value.plant_value = timestamp-28800;
 					FlashSetDataPlant(sensor_control_struct_value.plant_value);
 						//当前累计培育开始时间指针,当前累计培育开始时间数据长度
 						sensor_control_struct_value.public_int_value = 
@@ -451,7 +504,9 @@ static unsigned char dp_download_type_handle(const unsigned char value[], unsign
     //VALUE类型数据处理
     
     */
-    
+        	sensor_control_struct_value.public_int_value =  
+			sprintf(sensor_control_struct_value.public_temp_char,"%d",sensor_control_struct_value.plant_value); 
+			mcu_dp_string_update(DPID_START_DATE,sensor_control_struct_value.public_temp_char,sensor_control_struct_value.public_int_value); //STRING型数据上报; 
     //处理完DP数据后应有反馈
     ret = mcu_dp_value_update(DPID_TYPE,type);
 		mcu_dp_string_update(DPID_BEGIN_DATE,sensor_control_struct_value.public_temp_char,sensor_control_struct_value.public_int_value);
@@ -1061,6 +1116,10 @@ unsigned char dp_download_handle(unsigned char dpid,const unsigned char value[],
     ***********************************/
     unsigned char ret;
     switch(dpid) {
+        case DPID_ON: 
+            //浇水功能处理函数 
+            ret = dp_download_switch_handle(value,length); 
+        break; 
         case DPID_PUMP:
             //浇水功能处理函数
             ret = dp_download_pump_handle(value,length);
